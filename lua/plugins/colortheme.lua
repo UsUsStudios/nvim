@@ -23,6 +23,6 @@ return {
 		-- final / per-group overrides after the theme is loaded (optional)
 		-- useful when a plugin defines groups after the theme setup
 		vim.api.nvim_set_hl(0, "Function", { fg = "#ff4444" })
-		vim.api.nvim_set_hl(0, "Type", { fg = "#ff4444" })
+		vim.api.nvim_set_hl(0, "Type", { fg = "#1450b8" })
 	end,
 }
