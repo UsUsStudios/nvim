@@ -32,10 +32,11 @@ return {
 		dashboard.section.buttons = dashboard.section.buttons or {}
 		dashboard.section.buttons.val = {
 			dashboard.button("e", "  New file", "<cmd>ene<cr>"),
-			dashboard.button("f", "  Find file", "<cmd>Telescope find_files<cr>"),
+			dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files<cr>"),
 			dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<cr>"),
 			dashboard.button("s", "  Settings", "<cmd>edit $MYVIMRC<cr>"),
-			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
+			dashboard.button("l", "  Open Last Session", "<cmd>source ~/.local/state/nvim/session.vim<cr>"),
+			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 		dashboard.section.buttons.opts = dashboard.section.buttons.opts or {}
 		dashboard.section.buttons.opts.hl = "Function"
@@ -46,6 +47,7 @@ return {
 			return {
 				"",
 				"  UsUsStudios · " .. os.date("%Y-%m-%d %H:%M:%S"),
+				""
 			}
 		end
 		dashboard.section.footer = dashboard.section.footer or {}
