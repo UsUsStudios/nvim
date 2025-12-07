@@ -124,6 +124,13 @@ vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = 
 vim.keymap.set("n", "<leader>wl", function()
 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "[W]orkspace [L]ist Folders" })
+vim.api.nvim_create_user_command('dash', function(opts)
+  vim.cmd("Alpha")
+end, {
+  desc = 'Open the Alpha dashboard'
+  nargs = 0, -- Number of arguments (0 in this case)
+  -- Other options like complete, range, count, etc.
+})
 
 -- Outline
 vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", opts)

@@ -35,7 +35,7 @@ return {
 			dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files<cr>"),
 			dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<cr>"),
 			dashboard.button("s", "  Settings", "<cmd>edit $MYVIMRC<cr>"),
-			dashboard.button("l", "  Open Last Session", "<cmd>source ~/.local/state/nvim/session.vim<cr>"),
+			dashboard.button("l", "  Open Last Session", "<cmd>AutoSession restore<cr>"),
 			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 		dashboard.section.buttons.opts = dashboard.section.buttons.opts or {}

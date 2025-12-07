@@ -34,4 +34,12 @@ return {
       })
     end,
   },
+  event_handlers = {
+  	{
+  	  event = "neo_tree_buffer_enter",
+  	  handler = function()
+  	  	vim.cmd("let g:neo_tree_last_state = b:neo_tree_state")
+  	  end,
+  	},
+  },
 }

@@ -11,9 +11,9 @@ return {
 			},
 			-- you can also directly override highlight groups the theme defines
 			highlights = {
-				-- example: make identifiers and keywords use the new 'yellow' (now red)
+				-- example: make identifiers and keywords use the new 'yellow'
 				Identifier = { fg = "#0c6924" },
-				Keyword = { fg = "#ff5555", bold = true },
+				Keyword = { fg = "#d1a206", bold = true },
 			},
 		})
 
