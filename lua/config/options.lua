@@ -10,9 +10,9 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
-vim.o.scrolloff = 4
+vim.o.scrolloff = 15
 vim.o.sidescrolloff = 8
-vim.o.cursorline = false
+vim.o.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.hlsearch = false
@@ -36,7 +36,13 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.undofile = true
 vim.o.completeopt = "menuone,noselect"
+vim.o.confirm = true
+vim.o.list = true
+vim.o.number = true
+vim.o.relativenumber = false
 vim.opt.shortmess:append("c")
 vim.opt.iskeyword:append("-")
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 vim.opt.runtimepath:remove("/usr/share/vim/vimfiles")
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
