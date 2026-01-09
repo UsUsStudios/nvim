@@ -121,11 +121,6 @@ return {
 				filetypes = { "c", "cpp", "objc", "objcpp" },
 				cmd = { "clangd", "--background-index", "--clang-tidy" },
 			},
-
-			-- Java
-			jdtls = {
-				filetypes = { "java" },
-			},
 			-- basedpyright = {
 			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
 			--   settings = {
@@ -175,5 +170,5 @@ return {
 			vim.lsp.config(server, cfg)
 			vim.lsp.enable(server)
 		end
-	end,
+	end
 }

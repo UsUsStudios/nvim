@@ -9,6 +9,7 @@ vim.keymap.set("n", "<leader>r", function()
 	local file_noext = vim.fn.expand("%:r")
 	local outfile = vim.fn.fnamemodify(file_noext, ":t")
 
+	vim.cmd("w")
 	if ft == "c" then
 		vim.cmd("!g++ " .. file .. " -o " .. outfile)
 		vim.cmd("terminal ./" .. outfile)
@@ -16,7 +17,7 @@ vim.keymap.set("n", "<leader>r", function()
 		vim.cmd("!g++ " .. file .. " -o " .. outfile)
 		vim.cmd("terminal ./" .. outfile)
 	elseif ft == "java" then
-		vim.cmd("terminal ./gradlew run run")
+		vim.cmd("terminal ./gradlew run")
 	elseif ft == "python" then
 		vim.cmd("!python3 " .. file)
 	elseif ft == "lua" then
@@ -124,12 +125,12 @@ vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = 
 vim.keymap.set("n", "<leader>wl", function()
 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "[W]orkspace [L]ist Folders" })
-vim.api.nvim_create_user_command('dash', function(opts)
-  vim.cmd("Alpha")
+vim.api.nvim_create_user_command("Dash", function(opts)
+	vim.cmd("Alpha")
 end, {
-  desc = 'Open the Alpha dashboard'
-  nargs = 0, -- Number of arguments (0 in this case)
-  -- Other options like complete, range, count, etc.
+	desc = "Open the Alpha dashboard",
+	nargs = 0, -- Number of arguments (0 in this case)
+	-- Other options like complete, range, count, etc.
 })
 
 -- Outline
