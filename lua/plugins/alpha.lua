@@ -36,6 +36,7 @@ return {
 			dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<cr>"),
 			dashboard.button("s", "  Settings", "<cmd>edit $MYVIMRC<cr>"),
 			dashboard.button("l", "  Open Last Session", "<cmd>AutoSession restore<cr>"),
+			dashboard.button("n", "󰢷  Open No Way But Down", "<cmd>:cd ~/code/java/NoWayButDown/<cr>"),
 			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 		dashboard.section.buttons.opts = dashboard.section.buttons.opts or {}
@@ -47,7 +48,7 @@ return {
 			return {
 				"",
 				"  UsUsStudios · " .. os.date("%Y-%m-%d %H:%M:%S"),
-				""
+				"",
 			}
 		end
 		dashboard.section.footer = dashboard.section.footer or {}
@@ -60,7 +61,8 @@ return {
 		local function compute_top_padding()
 			local total_lines = vim.api.nvim_get_option("lines")
 			local header_h = type(dashboard.section.header.val) == "table" and #dashboard.section.header.val or 0
-			local buttons_h = (type(dashboard.section.buttons.val) == "table" and #dashboard.section.buttons.val or 0) * 2
+			local buttons_h = (type(dashboard.section.buttons.val) == "table" and #dashboard.section.buttons.val or 0)
+				* 2
 			local footer_h = type(dashboard.section.footer.val) == "table" and #dashboard.section.footer.val or 0
 			local used = header_h + buttons_h + footer_h
 			return math.max(2, math.floor((total_lines - used) / 2))
