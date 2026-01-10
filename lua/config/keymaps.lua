@@ -24,6 +24,9 @@ vim.keymap.set("n", "<leader>r", function()
 		vim.cmd("!lua " .. file)
 	elseif ft == "sh" then
 		vim.cmd("!bash " .. file)
+	elseif ft == "rust" then
+		vim.cmd("!rustc " .. file .. " --out-dir /build")
+		vim.cmd("terminal ./build/" .. file_noext)
 	else
 		print("No compile command set for filetype: " .. ft)
 	end

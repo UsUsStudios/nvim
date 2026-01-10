@@ -151,6 +151,7 @@ return {
 			-- cssls = {},
 			-- ltex = {},
 			-- texlab = {},
+			rust_analyzer = { filetypes = { "rs" } },
 		}
 
 		-- Ensure the servers and tools above are installed
@@ -170,5 +171,5 @@ return {
 			vim.lsp.config(server, cfg)
 			vim.lsp.enable(server)
 		end
-	end
+	end,
 }
