@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>r", function()
 	elseif ft == "sh" then
 		vim.cmd("!bash " .. file)
 	elseif ft == "rust" then
-		vim.cmd("terminal cargo build && cargo fmt && ./target/debug/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))
+		vim.cmd("terminal cargo fmt && cargo run")
 	else
 		print("No compile command set for filetype: " .. ft)
 	end
