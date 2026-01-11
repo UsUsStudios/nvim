@@ -29,6 +29,8 @@ vim.keymap.set("n", "<leader>r", function()
 	else
 		print("No compile command set for filetype: " .. ft)
 	end
+
+	vim.cmd("set modifiable") -- make the shell modifiable so you can input
 end, { noremap = true, silent = true })
 
 -- Delete stuff without copying
