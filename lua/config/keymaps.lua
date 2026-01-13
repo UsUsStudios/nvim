@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>r", function()
 	elseif ft == "sh" then
 		vim.cmd("!bash " .. file)
 	elseif ft == "rust" then
-		vim.cmd("terminal cargo fmt && cargo run")
+		vim.cmd("terminal export RUST_BACKTRACE=1 && cargo fmt && cargo run")
 	else
 		print("No compile command set for filetype: " .. ft)
 	end
@@ -48,12 +48,6 @@ vim.keymap.set("v", "<", "<gv", opts)
 -- Centre find
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
-
--- Esc -> ff
-vim.keymap.set("i", "ff", "<Esc>", opts)
-vim.keymap.set("v", "ff", "<Esc>", opts)
-vim.keymap.set("c", "ff", "<Esc>", opts)
-vim.keymap.set("t", "ff", "<Esc>", opts)
 
 -- Redo
 vim.keymap.set("n", "U", "<C-r>", opts)
