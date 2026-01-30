@@ -121,6 +121,11 @@ return {
 				filetypes = { "c", "cpp", "objc", "objcpp" },
 				cmd = { "clangd", "--background-index", "--clang-tidy" },
 			},
+
+			-- Java
+			jdtls = {
+				filetypes = { "java" },
+			},
 			-- basedpyright = {
 			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
 			--   settings = {
@@ -151,7 +156,6 @@ return {
 			-- cssls = {},
 			-- ltex = {},
 			-- texlab = {},
-			rust_analyzer = { filetypes = { "rs" } },
 		}
 
 		-- Ensure the servers and tools above are installed

@@ -57,6 +57,7 @@ vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>x", ":BufDel<CR>", opts)
 vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts)
+vim.keymap.set("n", "<leader>e", "<cmd>w<CR>", opts)
 
 -- Window management
 vim.keymap.set("n", "<leader>v", "<C-w>v", opts) -- Split window vertically
