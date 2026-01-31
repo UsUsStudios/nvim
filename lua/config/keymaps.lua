@@ -33,6 +33,10 @@ vim.keymap.set("n", "<leader>r", function()
 	vim.cmd("set modifiable") -- make the shell modifiable so you can input
 end, { noremap = true, silent = true })
 
+-- Floaterm stuff
+vim.keymap.set({ "n", "t" }, "<leader>t", "<cmd>FloatermToggle<CR>") -- Open and close Floaterm terminal
+vim.keymap.set("n", "<leader>g", "<cmd>FloatermToggle<CR>lazygit<CR>") -- Open lazygit in floaterm
+
 -- Delete stuff without copying
 vim.keymap.set("n", "x", '"_x', opts)
 vim.keymap.set("n", "dd", '"_dd', opts)
@@ -56,8 +60,8 @@ vim.keymap.set("n", "U", "<C-r>", opts)
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>x", ":BufDel<CR>", opts)
-vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts)
-vim.keymap.set("n", "<leader>e", "<cmd>w<CR>", opts)
+vim.keymap.set("n", "<leader>b", ":enew <CR>", opts)
+vim.keymap.set("n", "<leader>e", ":w<CR>", opts)
 
 -- Window management
 vim.keymap.set("n", "<leader>v", "<C-w>v", opts) -- Split window vertically
