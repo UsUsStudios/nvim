@@ -7,23 +7,142 @@ return {
 		local dashboard = require("alpha.themes.dashboard")
 
 		local original_header = {
-			[[                                                      ]],
-			[[                                                      ]],
-			[[                                                      ]],
-			[[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗  ]],
-			[[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║  ]],
-			[[  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║  ]],
-			[[  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║  ]],
-			[[  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║  ]],
-			[[  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝  ]],
-			[[                                                      ]],
-			[[          UsUsStudios's Playground + Asylum           ]],
-			[[                                                      ]],
+			"                                                      ",
+			"                                                      ",
+			"                                                      ",
+			"                                                      ",
+			"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗  ",
+			"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║  ",
+			"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║  ",
+			"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║  ",
+			"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║  ",
+			"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝  ",
+			"                                                      ",
+			"          UsUsStudios's Playground + Asylum           ",
+			"                                                      ",
+			"                                                      ",
+			"                                                      ",
+			"                                                      ",
+			"                                                      ",
 		}
 
+		local yaml = vim.fn.system({
+			"onefetch",
+			vim.fn.getcwd(),
+			"--output",
+			"yaml",
+		})
+
+		local onefetch_success = vim.v.shell_error == 0
+
+		if onefetch_success then
+			-- strip trailing newline
+			yaml = yaml:gsub("%s+$", "")
+
+			local parsed = vim.fn.system({
+				"yq",
+				[[
+{
+  "user": .title.gitUsername,
+  "version": .title.gitVersion,
+  "repo": .infoFields[0].ProjectInfo.repoName,
+  "branches": .infoFields[0].ProjectInfo.numberOfBranches,
+  "tags": .infoFields[0].ProjectInfo.numberOfTags,
+  "head": .infoFields[2].HeadInfo.headRefs.shortCommitId,
+  "added": .infoFields[3].PendingInfo.added,
+  "deleted": .infoFields[3].PendingInfo.deleted,
+  "ver": .infoFields[4].VersionInfo.version,
+  "created": .infoFields[5].CreatedInfo.creationDate,
+  "lang": .infoFields[6].LanguagesInfo.languagesWithPercentage[0].language,
+  "langpct": .infoFields[6].LanguagesInfo.languagesWithPercentage[0].percentage,
+  "author": .infoFields[8].AuthorsInfo.authors[0].name,
+  "commitsByAuthor": .infoFields[8].AuthorsInfo.authors[0].nbrOfCommits,
+  "lastChange": .infoFields[9].LastChangeInfo.lastChange,
+  "url": .infoFields[11].UrlInfo.repoUrl,
+  "commits": .infoFields[12].CommitsInfo.numberOfCommits,
+  "loc": .infoFields[14].LocInfo.linesOfCode,
+  "size": .infoFields[15].SizeInfo.repoSize,
+  "files": .infoFields[15].SizeInfo.fileCount,
+  "license": .infoFields[16].LicenseInfo.license
+}
+  ]],
+				"-",
+			}, yaml)
+
+			local data = vim.json.decode(parsed)
+
+			local function build_onefetch_block()
+				local lines = {}
+
+				table.insert(lines, data.user .. " ~ " .. data.version)
+				table.insert(lines, "-----------------------------")
+
+				table.insert(
+					lines,
+					string.format("Project: %s (%s branches, %s tags)", data.repo, data.branches, data.tags)
+				)
+
+				table.insert(lines, "HEAD: " .. data.head)
+
+				table.insert(lines, "Pending: " .. data.added .. "+ " .. data.deleted .. "-")
+
+				if data.ver ~= "" then
+					table.insert(lines, "Version: " .. data.ver)
+				end
+
+				table.insert(lines, "Created: " .. data.created)
+
+				table.insert(lines, "Language: " .. data.lang .. " (" .. string.format("%.2f", data.langpct) .. "%)")
+
+				table.insert(lines, "Top Author: " .. data.author .. " (" .. data.commitsByAuthor .. " commits)")
+
+				table.insert(lines, "Last change: " .. data.lastChange)
+
+				table.insert(lines, "Repo: " .. data.url)
+
+				table.insert(lines, "Commits: " .. data.commits)
+
+				table.insert(lines, "Lines of code: " .. data.loc)
+
+				table.insert(lines, "Size: " .. data.size)
+
+				table.insert(lines, "File Count: " .. data.files)
+
+				if data.license ~= "" then
+					table.insert(lines, "License: " .. data.license)
+				end
+
+				return lines
+			end
+
+			local stat_lines = build_onefetch_block()
+
+			local function merge_columns(left, right, gap)
+				gap = gap or 4
+
+				local width = 0
+				for _, l in ipairs(left) do
+					width = math.max(width, #l)
+				end
+
+				local height = math.max(#left, #right)
+				local out = {}
+
+				for i = 1, height do
+					local l = left[i] or ""
+					local r = right[i] or ""
+
+					table.insert(out, l .. string.rep(" ", gap) .. r)
+				end
+
+				return out
+			end
+
+			dashboard.section.header.val = merge_columns(original_header, stat_lines, 7)
+		else
+			dashboard.section.header.val = original_header
+		end
 		-- set header without manual padding; let alpha center it
-		dashboard.section.header = dashboard.section.header or {}
-		dashboard.section.header.val = original_header
 		dashboard.section.header.opts = dashboard.section.header.opts or {}
 		dashboard.section.header.opts.hl = "Title"
 		dashboard.section.header.opts.position = "center"
@@ -45,9 +164,9 @@ return {
 
 		local stats = require("lazy").stats()
 
+		dashboard.section.footer.opts = { position = "center", hl = "Type" }
 		dashboard.section.footer.val = {
 			"Plugins: " .. stats.count,
-			"Startup: " .. string.format("%.2f ms", stats.startuptime),
 		}
 
 		-- vertical centering (defensive)
