@@ -33,10 +33,6 @@ vim.keymap.set("n", "<leader>r", function()
 	vim.cmd("set modifiable") -- make the shell modifiable so you can input
 end, { noremap = true, silent = true })
 
--- Floaterm stuff
-vim.keymap.set({ "n", "t" }, "<leader>t", "<cmd>FloatermToggle<CR>") -- Open and close Floaterm terminal
-vim.keymap.set("n", "<leader>g", "<cmd>FloatermToggle<CR>lazygit<CR>") -- Open lazygit in floaterm
-
 -- Delete stuff without copying
 vim.keymap.set("n", "x", '"_x', opts)
 vim.keymap.set("n", "dd", '"_dd', opts)
