@@ -43,19 +43,12 @@ return {
 		dashboard.section.buttons.opts.hl = "Function"
 		dashboard.section.buttons.opts.position = "center"
 
-		-- dynamic footer, centered
-		local function footer_text()
-			return {
-				"",
-				"  UsUsStudios · " .. os.date("%Y-%m-%d %H:%M:%S"),
-				"",
-			}
-		end
-		dashboard.section.footer = dashboard.section.footer or {}
-		dashboard.section.footer.val = footer_text()
-		dashboard.section.footer.opts = dashboard.section.footer.opts or {}
-		dashboard.section.footer.opts.hl = "Comment"
-		dashboard.section.footer.opts.position = "center"
+		local stats = require("lazy").stats()
+
+		dashboard.section.footer.val = {
+			"Plugins: " .. stats.count,
+			"Startup: " .. string.format("%.2f ms", stats.startuptime),
+		}
 
 		-- vertical centering (defensive)
 		local function compute_top_padding()
