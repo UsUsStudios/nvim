@@ -28,9 +28,6 @@ return {
 			"          UsUsStudios's Playground + Asylum           ",
 			"                                                      ",
 			"                                                      ",
-			"                                                      ",
-			"                                                      ",
-			"                                                      ",
 		}
 
 		local yaml = vim.fn.system({
@@ -213,7 +210,6 @@ return {
 			dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<cr>"),
 			dashboard.button("s", "  Settings", "<cmd>edit $MYVIMRC<cr>"),
 			dashboard.button("l", "  Open Last Session", "<cmd>AutoSession restore<cr>"),
-			dashboard.button("n", "󰢷  Open Neovim Config", "<cmd>:cd ~/.config/nvim/<cr>"),
 			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 		dashboard.section.buttons.opts = dashboard.section.buttons.opts or {}
