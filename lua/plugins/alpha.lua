@@ -5,6 +5,13 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
+		local palette = require("nightfox.palette").load("nightfox")
+
+		vim.api.nvim_set_hl(0, "AlphaHeaderTitle", { fg = palette.blue.base })
+		vim.api.nvim_set_hl(0, "AlphaHeaderStats", { fg = palette.red.base })
+		vim.api.nvim_set_hl(0, "AlphaHeaderValue", { fg = palette.orange.base })
+		vim.api.nvim_set_hl(0, "AlphaHeaderDivid", { fg = palette.green.base })
+		vim.api.nvim_set_hl(0, "AlphaButtons", { fg = palette.cyan.base })
 
 		local original_header = {
 			"                                                      ",
@@ -51,7 +58,6 @@ return {
   "head": .infoFields[2].HeadInfo.headRefs.shortCommitId,
   "added": .infoFields[3].PendingInfo.added,
   "deleted": .infoFields[3].PendingInfo.deleted,
-  "ver": .infoFields[4].VersionInfo.version,
   "created": .infoFields[5].CreatedInfo.creationDate,
   "lang": .infoFields[6].LanguagesInfo.languagesWithPercentage[0].language,
   "langpct": .infoFields[6].LanguagesInfo.languagesWithPercentage[0].percentage,
@@ -63,7 +69,6 @@ return {
   "loc": .infoFields[14].LocInfo.linesOfCode,
   "size": .infoFields[15].SizeInfo.repoSize,
   "files": .infoFields[15].SizeInfo.fileCount,
-  "license": .infoFields[16].LicenseInfo.license
 }
   ]],
 				"-",
@@ -83,34 +88,16 @@ return {
 				)
 
 				table.insert(lines, "HEAD: " .. data.head)
-
 				table.insert(lines, "Pending: " .. data.added .. "+ " .. data.deleted .. "-")
-
-				if data.ver ~= "" then
-					table.insert(lines, "Version: " .. data.ver)
-				end
-
 				table.insert(lines, "Created: " .. data.created)
-
 				table.insert(lines, "Language: " .. data.lang .. " (" .. string.format("%.2f", data.langpct) .. "%)")
-
 				table.insert(lines, "Top Author: " .. data.author .. " (" .. data.commitsByAuthor .. " commits)")
-
 				table.insert(lines, "Last change: " .. data.lastChange)
-
 				table.insert(lines, "Repo: " .. data.url)
-
 				table.insert(lines, "Commits: " .. data.commits)
-
 				table.insert(lines, "Lines of code: " .. data.loc)
-
 				table.insert(lines, "Size: " .. data.size)
-
 				table.insert(lines, "File Count: " .. data.files)
-
-				if data.license ~= "" then
-					table.insert(lines, "License: " .. data.license)
-				end
 
 				return lines
 			end
@@ -144,7 +131,78 @@ return {
 		end
 		-- set header without manual padding; let alpha center it
 		dashboard.section.header.opts = dashboard.section.header.opts or {}
-		dashboard.section.header.opts.hl = "Title"
+		dashboard.section.header.opts.hl = {
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 72 },
+				{ "AlphaHeaderValue", 75, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderDivid", 61, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 69 },
+				{ "AlphaHeaderValue", 69, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 66 },
+				{ "AlphaHeaderValue", 66, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 137 },
+				{ "AlphaHeaderStats", 137, 147 },
+				{ "AlphaHeaderValue", 147, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 149 },
+				{ "AlphaHeaderStats", 149, 158 },
+				{ "AlphaHeaderValue", 158, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 137 },
+				{ "AlphaHeaderStats", 137, 152 },
+				{ "AlphaHeaderValue", 152, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 145 },
+				{ "AlphaHeaderStats", 145, 160 },
+				{ "AlphaHeaderValue", 160, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 145 },
+				{ "AlphaHeaderStats", 145, 163 },
+				{ "AlphaHeaderValue", 163, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 135 },
+				{ "AlphaHeaderStats", 135, 140 },
+				{ "AlphaHeaderValue", 140, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 69 },
+				{ "AlphaHeaderValue", 69, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 75 },
+				{ "AlphaHeaderValue", 75, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 66 },
+				{ "AlphaHeaderValue", 66, 200 },
+			},
+			{
+				{ "AlphaHeaderTitle", 0, 61 },
+				{ "AlphaHeaderStats", 61, 72 },
+				{ "AlphaHeaderValue", 72, 200 },
+			},
+		}
+
 		dashboard.section.header.opts.position = "center"
 
 		-- buttons (ensure group exists and is centered)
@@ -159,7 +217,6 @@ return {
 			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 		dashboard.section.buttons.opts = dashboard.section.buttons.opts or {}
-		dashboard.section.buttons.opts.hl = "Function"
 		dashboard.section.buttons.opts.position = "center"
 
 		local stats = require("lazy").stats()
@@ -189,18 +246,5 @@ return {
 		end
 
 		alpha.setup(dashboard.opts)
-
-		local aug = vim.api.nvim_create_augroup("AlphaDashboard", { clear = true })
-		vim.api.nvim_create_autocmd("VimResized", {
-			group = aug,
-			callback = vim.schedule_wrap(function()
-				dashboard.section.header.val = original_header
-				dashboard.section.footer.val = footer_text()
-				if dashboard.opts and dashboard.opts.layout and dashboard.opts.layout[1] then
-					dashboard.opts.layout[1].val = compute_top_padding()
-				end
-				alpha.redraw()
-			end),
-		})
 	end,
 }

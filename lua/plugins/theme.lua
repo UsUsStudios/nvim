@@ -1,1 +1,22 @@
-return { "EdenEast/nightfox.nvim" }
+return {
+	"EdenEast/nightfox.nvim",
+	config = function()
+		Shade = require("nightfox.lib.shade")
+		require("nightfox").setup({
+			palettes = {
+				all = {
+					black = Shade.new("#233325", 0.15, -0.15),
+					red = Shade.new("#fffb00", 0.15, -0.15),
+					green = Shade.new("#25be6a", 0.15, -0.15), -- #25be6a or #42BE65
+					yellow = Shade.new("#9ceb1e", 0.15, -0.15),
+					blue = Shade.new("#009102", 0.15, -0.15),
+					magenta = Shade.new("#78b9ff", 0.15, -0.15),
+					cyan = Shade.new("#9ceb1e", 0.15, -0.15),
+					white = Shade.new("#dfdfe0", 0.15, -0.15),
+					orange = Shade.new("#ffbf00", 0.15, -0.15),
+					pink = Shade.new("#FF7EB6", 0.15, -0.15),
+				},
+			},
+		})
+	end,
+}
