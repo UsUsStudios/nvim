@@ -5,9 +5,10 @@ return {
 		require("nightfox").setup({
 			palettes = {
 				all = {
-					black = Shade.new("#233325", 0.15, -0.15),
+					bg1 = "#0f1410",
+					black = Shade.new("#000000", 0, 0),
 					red = Shade.new("#fffb00", 0.15, -0.15),
-					green = Shade.new("#25be6a", 0.15, -0.15), -- #25be6a or #42BE65
+					green = Shade.new("#25be6a", 0.15, -0.15),
 					yellow = Shade.new("#9ceb1e", 0.15, -0.15),
 					blue = Shade.new("#009102", 0.15, -0.15),
 					magenta = Shade.new("#78b9ff", 0.15, -0.15),
