@@ -19,11 +19,11 @@ vim.keymap.set("n", "<leader>r", function()
 	elseif ft == "java" then
 		vim.cmd("terminal ./gradlew run")
 	elseif ft == "python" then
-		vim.cmd("!python3 " .. file)
+		vim.cmd("terminal python3 " .. file)
 	elseif ft == "lua" then
 		vim.cmd("!lua " .. file)
 	elseif ft == "sh" then
-		vim.cmd("!bash " .. file)
+		vim.cmd("terminal bash " .. file)
 	elseif ft == "rust" then
 		vim.cmd("terminal export RUST_BACKTRACE=1 && cargo fmt && cargo run")
 	else

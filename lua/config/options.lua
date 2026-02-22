@@ -10,7 +10,7 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
-vim.o.scrolloff = 15
+vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 vim.o.cursorline = true
 vim.o.splitbelow = true
@@ -39,7 +39,7 @@ vim.o.completeopt = "menuone,noselect"
 vim.o.confirm = true
 vim.o.list = true
 vim.o.number = true
-vim.o.relativenumber = false
+vim.o.relativenumber = true
 vim.opt.shortmess:append("c")
 vim.opt.iskeyword:append("-")
 vim.opt.formatoptions:remove({ "c", "r", "o" })

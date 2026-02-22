@@ -101,22 +101,6 @@ return {
 					},
 				},
 			},
-			pylsp = {
-				settings = {
-					pylsp = {
-						plugins = {
-							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false },
-							autopep8 = { enabled = false },
-							yapf = { enabled = false },
-							mccabe = { enabled = false },
-							pylsp_mypy = { enabled = false },
-							pylsp_black = { enabled = false },
-							pylsp_isort = { enabled = false },
-						},
-					},
-				},
-			},
 			clangd = {
 				filetypes = { "c", "cpp", "objc", "objcpp" },
 				cmd = { "clangd", "--background-index", "--clang-tidy" },
@@ -126,22 +110,22 @@ return {
 			jdtls = {
 				filetypes = { "java" },
 			},
-			-- basedpyright = {
-			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
-			--   settings = {
-			--     basedpyright = {
-			--       disableOrganizeImports = true, -- Using Ruff's import organizer
-			--       disableLanguageServices = false,
-			--       analysis = {
-			--         ignore = { '*' },                 -- Ignore all files for analysis to exclusively use Ruff for linting
-			--         typeCheckingMode = 'off',
-			--         diagnosticMode = 'openFilesOnly', -- Only analyze open files
-			--         useLibraryCodeForTypes = true,
-			--         autoImportCompletions = true,     -- whether pyright offers auto-import completions
-			--       },
-			--     },
-			--   },
-			-- },
+			basedpyright = {
+				-- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
+				settings = {
+					basedpyright = {
+						disableOrganizeImports = true, -- Using Ruff's import organizer
+						disableLanguageServices = false,
+						analysis = {
+							ignore = { "*" }, -- Ignore all files for analysis to exclusively use Ruff for linting
+							typeCheckingMode = "off",
+							diagnosticMode = "openFilesOnly", -- Only analyze open files
+							useLibraryCodeForTypes = true,
+							autoImportCompletions = true, -- whether pyright offers auto-import completions
+						},
+					},
+				},
+			},
 			ruff = {},
 			jsonls = {},
 			sqlls = {},

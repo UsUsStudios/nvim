@@ -8,10 +8,10 @@ return {
 		local palette = require("nightfox.palette").load("nightfox")
 
 		vim.api.nvim_set_hl(0, "AlphaHeaderTitle", { fg = palette.blue.base })
-		vim.api.nvim_set_hl(0, "AlphaHeaderStats", { fg = palette.red.base })
+		vim.api.nvim_set_hl(0, "AlphaHeaderStats", { fg = palette.cyan.base })
 		vim.api.nvim_set_hl(0, "AlphaHeaderValue", { fg = palette.orange.base })
 		vim.api.nvim_set_hl(0, "AlphaHeaderDivid", { fg = palette.green.base })
-		vim.api.nvim_set_hl(0, "AlphaButtons", { fg = palette.cyan.base })
+		vim.api.nvim_set_hl(0, "AlphaButtons", { fg = palette.yellow.base })
 
 		local original_header = {
 			"                                                      ",
