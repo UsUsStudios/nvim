@@ -7,6 +7,8 @@ return {
 		local dashboard = require("alpha.themes.dashboard")
 		local palette = require("nightfox.palette").load("nightfox")
 
+		local gitUsernameLength = 0
+
 		vim.api.nvim_set_hl(0, "AlphaHeaderTitle", { fg = palette.blue.base })
 		vim.api.nvim_set_hl(0, "AlphaHeaderStats", { fg = palette.cyan.base })
 		vim.api.nvim_set_hl(0, "AlphaHeaderValue", { fg = palette.orange.base })
@@ -72,6 +74,7 @@ return {
 			}, yaml)
 
 			local data = vim.json.decode(parsed)
+			gitUsernameLength = #data.user
 
 			local function build_onefetch_block()
 				local lines = {}
@@ -131,8 +134,8 @@ return {
 		dashboard.section.header.opts.hl = {
 			{
 				{ "AlphaHeaderTitle", 0, 61 },
-				{ "AlphaHeaderStats", 61, 72 },
-				{ "AlphaHeaderValue", 75, 200 },
+				{ "AlphaHeaderStats", 61, 61 + gitUsernameLength },
+				{ "AlphaHeaderValue", 64 + gitUsernameLength, 200 },
 			},
 			{
 				{ "AlphaHeaderTitle", 0, 61 },

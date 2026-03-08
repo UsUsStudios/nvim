@@ -2,6 +2,9 @@
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 local opts = { noremap = true, silent = true }
 
+-- JJ to esc
+vim.keymap.set({ "i", "c", "o" }, "jj", "<esc>", {})
+
 -- Run
 vim.keymap.set("n", "<leader>r", function()
 	local ft = vim.bo.filetype
@@ -57,6 +60,7 @@ vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>x", ":BufDel<CR>", opts)
 vim.keymap.set("n", "<leader>b", ":enew <CR>", opts)
+
 vim.keymap.set("n", "<leader>e", ":w<CR>", opts)
 
 -- Window management
