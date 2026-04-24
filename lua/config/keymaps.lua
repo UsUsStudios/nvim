@@ -13,12 +13,13 @@ vim.keymap.set("n", "<leader>r", function()
 	local outfile = vim.fn.fnamemodify(file_noext, ":t")
 
 	vim.cmd("w")
-	if ft == "c" then
-		vim.cmd("!g++ " .. file .. " -o " .. outfile)
-		vim.cmd("terminal ./" .. outfile)
-	elseif ft == "cpp" then
-		vim.cmd("!g++ " .. file .. " -o " .. outfile)
-		vim.cmd("terminal ./" .. outfile)
+	if ft == "c" or ft == "cpp" then
+		if vim.fn.glob("Makefile") == "" then
+			vim.cmd("!g++ " .. file .. " -o " .. outfile)
+			vim.cmd("terminal ./" .. outfile)
+		else
+			vim.cmd("!make run")
+		end
 	elseif ft == "java" then
 		vim.cmd("terminal ./gradlew run")
 	elseif ft == "python" then

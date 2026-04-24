@@ -41,7 +41,8 @@ return {
 
 		local onefetch_success = vim.v.shell_error == 0
 
-		if onefetch_success then
+		if onefetch_success and #yaml ~= 0 then
+			vim.g.yes = "hiiii"
 			-- strip trailing newline
 			yaml = yaml:gsub("%s+$", "")
 
