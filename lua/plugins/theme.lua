@@ -3,6 +3,9 @@ return {
 	config = function()
 		Shade = require("nightfox.lib.shade")
 		require("nightfox").setup({
+			options = {
+				transparent = true,
+			},
 			palettes = {
 				all = {
 					bg1 = "#0f1410",
