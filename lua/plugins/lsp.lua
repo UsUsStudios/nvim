@@ -136,6 +136,7 @@ return {
 			-- cssls = {},
 			-- ltex = {},
 			-- texlab = {},
+			jdtls = {},
 		}
 
 		-- Ensure the servers and tools above are installed
